@@ -1,64 +1,82 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include<ctime>
 using namespace std;
 
+  
+    string ve_letras_erradas[5] = {};
+    vector<int> vetor_teste;
+     string ve_palavra_secreta[]  = {"ABACATE", "PERA", "UVA", "MACA", "LARANJA", "ABACAXI", "ACEROLA", "CAJU", "MELANCIA", "PITANGA"};
 
+     string palavra_secreta(){
+           srand(time(NULL));
+            int secreto  = rand() % 9;
+         return ve_palavra_secreta[secreto];
+     } ;
 
+    bool nao_enforcou(){
+        int valor_tamanh_vetor = ve_letras_erradas->length();
+       
+        if(valor_tamanh_vetor >5){
+            cout << "Voce Foi Enformaco :C " << endl;
+            return false;
+        }
+        return true;
+    }
+    string palavrita  = palavra_secreta();
+    int lengt  =  palavrita.length();
 
- vector<int> vetor_teste;
+    string palavra_escondida = "";
+
+   bool ver_napalavra(string letra_esq){
+       bool achou = false;
+       for (size_t i = 0; i <lengt; i++)
+        {   
+            if(palavrita[i] == (letra_esq[0]))
+            {
+              palavra_escondida[i] = letra_esq[0];
+                
+               achou = true;  
+            }
+        }
+        if(achou){
+            return true;
+        }
+        return false;
+        }
+
+    bool nao_acertou(string palavra_ApenaspalarasPeqns){
+       
+        if(palavra_ApenaspalarasPeqns !=palavrita){
+            return true;
+        }
+        else{
+        cout << "PARABENS!!!! VOCE ACERTOU MIZERAVI, MININO BAUM SO" << endl;
+        cout << palavrita << endl;
+        return false;
+        }
+    }
  
 int main()
 {
-   string palavra_secreta  = "ABACATE";
-
-   cout << palavra_secreta << endl;
-
-    bool nao_acertou = true;
-    bool nao_enforcou = true;
-   
-    string palavra_escondida = "";
-
-    int lengt  =  palavra_secreta.length();
-
-    for (size_t l = 0; l < lengt; l++)
+    for(size_t l = 0; l < lengt; l++)
     {
-        palavra_escondida += "_";
-    }
-    
-    int chances  = lengt;
+        palavra_escondida += "-";
+    } 
+  
+   while(nao_acertou(palavra_escondida) && nao_enforcou()){
+      
+        cout << " Palavra secreta:  " << palavra_escondida << endl;
 
-   while(nao_acertou && nao_enforcou){
-       if(chances >= 0){ 
-
-       cout << " Palavra secreta:  " << palavra_escondida << endl;
-       cout << "Escolha uma letra" << endl;
-       char letra_esq;
+        cout << "ve_terra_erradas: "<< ve_letras_erradas->c_str()<<endl;
+       
+       cout << "Escolha uma letra:  ";
+       string letra_esq;
        cin >> letra_esq;
 
-       cout << "letra escolhida a foi:   " << letra_esq << endl;
-
-        int cont_ver = 0;
-
-        for (size_t i = 0; i <lengt; i++)
-        {   
-            if(palavra_secreta[i] == letra_esq){
-              palavra_escondida[i] = letra_esq;
-              cont_ver++;
-            }
-            
-         
+        if(ver_napalavra(letra_esq) == false){
+            ve_letras_erradas->append(letra_esq);
         }
-       if (cont_ver == 0){
-           chances--;
-       }
-
-       }
-        else{
-           cout << "Acabou a Festa Mermao!" << endl;
-           nao_enforcou = false;
-       }
-     
    }
-   
 }
