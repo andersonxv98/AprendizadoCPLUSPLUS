@@ -6,16 +6,16 @@ using namespace std;
 int main(){
     int x;
     cin >> x;
-    int resto, ano, mes, dias;
+    int  ano, mes, dias;
     
-    mes = x/30;
-    dias   = x% 30;
-    ano = 0;
-    if (mes >= 12){
-        ano = x/ 365;
-        
-        mes = mes % 12;
+    ano = x/365;
+    int d1 = x % 365;
+    mes = 0;
+    if(d1 >=30){
+        mes= d1/30;
     }
+    dias = d1 % 30;
+
 
     cout<<ano<<" ano(s)"<<endl;
     cout<<mes<<" mes(es)"<<endl;
